@@ -13,6 +13,7 @@ import WorldMask from './WorldMask'
 import WeatherAmbience from './WeatherAmbience'
 import AppHeader from './AppHeader'
 import EmptyState from './EmptyState'
+import SentiMusicPlayer from './SentiMusicPlayer'
 
 const PH_CENTER = [12.8797, 121.774]
 const PH_BOUNDS = L.latLngBounds([4.2158, 114.0952], [21.3217, 127.6048])
@@ -113,6 +114,7 @@ function PhilippinesMap() {
       <WeatherAmbience />
       <AppHeader />
       {thoughts?.length === 0 && <EmptyState />}
+      <SentiMusicPlayer visible={thoughts?.some((t) => t.category === 'senti') ?? false} />
     </div>
   )
 }
