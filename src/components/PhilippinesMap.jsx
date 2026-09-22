@@ -11,6 +11,7 @@ import { isGisingHours } from '../lib/gisingHours'
 import NewThoughtForm from './NewThoughtForm'
 import ClosedNotice from './ClosedNotice'
 import WorldMask from './WorldMask'
+import WeatherAmbience from './WeatherAmbience'
 
 L.Marker.prototype.options.icon = L.icon({
   iconUrl: markerIcon,
@@ -80,30 +81,33 @@ function PhilippinesMap() {
   }, [])
 
   return (
-    <MapContainer
-      center={PH_CENTER}
-      zoom={6}
-      minZoom={5}
-      maxZoom={18}
-      maxBounds={PH_BOUNDS}
-      maxBoundsViscosity={1.0}
-      preferCanvas
-      className="ph-map"
-    >
-      <TileLayer
-        attribution='<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
-        url={`https://api.maptiler.com/maps/basic-v2-dark/256/{z}/{x}/{y}.png?key=${import.meta.env.VITE_MAPTILER_KEY}`}
-      />
-      <WorldMask />
-      <ClickCapture onSelect={setPendingPoint} />
-      <ThoughtPins thoughts={thoughts} />
-      {pendingPoint && gisingOpen && (
-        <NewThoughtForm point={pendingPoint} onCancel={() => setPendingPoint(null)} />
-      )}
-      {pendingPoint && !gisingOpen && (
-        <ClosedNotice point={pendingPoint} onDismiss={() => setPendingPoint(null)} />
-      )}
-    </MapContainer>
+    <div className="ph-map-wrapper">
+      <MapContainer
+        center={PH_CENTER}
+        zoom={6}
+        minZoom={5}
+        maxZoom={18}
+        maxBounds={PH_BOUNDS}
+        maxBoundsViscosity={1.0}
+        preferCanvas
+        className="ph-map"
+      >
+        <TileLayer
+          attribution='<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
+          url={`https://api.maptiler.com/maps/basic-v2-dark/256/{z}/{x}/{y}.png?key=${import.meta.env.VITE_MAPTILER_KEY}`}
+        />
+        <WorldMask />
+        <ClickCapture onSelect={setPendingPoint} />
+        <ThoughtPins thoughts={thoughts} />
+        {pendingPoint && gisingOpen && (
+          <NewThoughtForm point={pendingPoint} onCancel={() => setPendingPoint(null)} />
+        )}
+        {pendingPoint && !gisingOpen && (
+          <ClosedNotice point={pendingPoint} onDismiss={() => setPendingPoint(null)} />
+        )}
+      </MapContainer>
+      <WeatherAmbience />
+    </div>
   )
 }
 

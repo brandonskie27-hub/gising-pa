@@ -1,4 +1,10 @@
-.ph-map {
+.ph-map-wrapper {
+  position: relative;
   width: 100%;
   height: 100vh;
+}
+
+.ph-map {
+  width: 100%;
+  height: 100%;
 }
