@@ -60,6 +60,10 @@
   background: rgba(255, 255, 255, 0.06);
 }
 
+.thought-form-actions button:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
 .thought-form-actions button[type='submit'] {
   background: var(--accent);
   color: #1a1406;
@@ -69,6 +73,12 @@
 
 .thought-form-actions button[type='submit']:hover {
   filter: brightness(1.08);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .thought-form-actions button {
+    transition: transform 0.1s ease-out;
+  }
 }
 
 .thought-form-actions button:disabled {

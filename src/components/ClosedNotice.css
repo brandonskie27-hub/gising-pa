@@ -26,3 +26,13 @@
 .closed-notice button:hover {
   filter: brightness(1.08);
 }
+
+.closed-notice button:active {
+  transform: scale(0.97);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .closed-notice button {
+    transition: transform 0.1s ease-out;
+  }
+}

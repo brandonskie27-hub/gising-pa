@@ -84,6 +84,8 @@ function LightningLayer() {
   const [flash, setFlash] = useState(false)
 
   useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
     let timeout
     function scheduleFlash() {
       timeout = setTimeout(() => {

@@ -12,6 +12,7 @@ import ClosedNotice from './ClosedNotice'
 import WorldMask from './WorldMask'
 import WeatherAmbience from './WeatherAmbience'
 import AppHeader from './AppHeader'
+import EmptyState from './EmptyState'
 
 const PH_CENTER = [12.8797, 121.774]
 const PH_BOUNDS = L.latLngBounds([4.2158, 114.0952], [21.3217, 127.6048])
@@ -48,7 +49,7 @@ function ThoughtPins({ thoughts }) {
 }
 
 function PhilippinesMap() {
-  const [thoughts, setThoughts] = useState([])
+  const [thoughts, setThoughts] = useState(null)
   const [pendingPoint, setPendingPoint] = useState(null)
   const [gisingOpen, setGisingOpen] = useState(() => isGisingHours())
 
@@ -63,7 +64,7 @@ function PhilippinesMap() {
         .from('thoughts')
         .select('*')
         .order('created_at', { ascending: false })
-      if (!error) setThoughts(data)
+      setThoughts(error ? [] : data)
     }
     loadThoughts()
 
@@ -73,7 +74,7 @@ function PhilippinesMap() {
         'postgres_changes',
         { event: 'INSERT', schema: 'public', table: 'thoughts' },
         (payload) => {
-          setThoughts((prev) => [payload.new, ...prev])
+          setThoughts((prev) => [payload.new, ...(prev ?? [])])
         },
       )
       .subscribe()
@@ -101,7 +102,7 @@ function PhilippinesMap() {
         />
         <WorldMask />
         <ClickCapture onSelect={setPendingPoint} />
-        <ThoughtPins thoughts={thoughts} />
+        <ThoughtPins thoughts={thoughts ?? []} />
         {pendingPoint && gisingOpen && (
           <NewThoughtForm point={pendingPoint} onCancel={() => setPendingPoint(null)} />
         )}
@@ -111,6 +112,7 @@ function PhilippinesMap() {
       </MapContainer>
       <WeatherAmbience />
       <AppHeader />
+      {thoughts?.length === 0 && <EmptyState />}
     </div>
   )
 }

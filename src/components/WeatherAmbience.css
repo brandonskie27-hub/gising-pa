@@ -152,3 +152,20 @@
 .weather-lightning.flash {
   opacity: 0.35;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .raindrop,
+  .cloud-blob,
+  .star,
+  .fog-band {
+    animation: none !important;
+  }
+
+  .raindrop {
+    opacity: 0.3;
+  }
+
+  .star {
+    opacity: 0.6;
+  }
+}

@@ -1,0 +1,20 @@
+.empty-state {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1100;
+  pointer-events: none;
+  max-width: 90%;
+  text-align: center;
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: rgba(13, 27, 42, 0.55);
+  backdrop-filter: blur(4px);
+}
+
+.empty-state p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-muted);
+}
