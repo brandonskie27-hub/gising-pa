@@ -1,0 +1,29 @@
+.thought-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 220px;
+}
+
+.thought-form-textarea {
+  resize: none;
+  font: inherit;
+  padding: 6px 8px;
+}
+
+.thought-form-select {
+  font: inherit;
+  padding: 4px;
+}
+
+.thought-form-error {
+  color: #c0392b;
+  font-size: 0.85em;
+  margin: 0;
+}
+
+.thought-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
