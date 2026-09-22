@@ -1,15 +1,8 @@
 import { useState } from 'react'
 import { Popup } from 'react-leaflet'
 import { supabase } from '../supabaseClient'
+import { CATEGORIES } from '../lib/categories'
 import './NewThoughtForm.css'
-
-const CATEGORIES = [
-  { value: 'senti', label: 'Senti / Love' },
-  { value: 'academic', label: 'Academic' },
-  { value: 'family', label: 'Family' },
-  { value: 'career', label: 'Career' },
-  { value: 'personal', label: 'Personal' },
-]
 
 function NewThoughtForm({ point, onCancel }) {
   const [content, setContent] = useState('')

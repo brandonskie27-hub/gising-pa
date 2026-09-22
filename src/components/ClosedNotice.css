@@ -1,15 +1,28 @@
 .closed-notice {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
   min-width: 200px;
   text-align: center;
 }
 
 .closed-notice p {
   margin: 0;
+  color: var(--text);
 }
 
 .closed-notice button {
   align-self: center;
+  font: inherit;
+  padding: 6px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: #1a1406;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.closed-notice button:hover {
+  filter: brightness(1.08);
 }

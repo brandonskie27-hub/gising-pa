@@ -1,0 +1,83 @@
+/* Retheme Leaflet's default (light) chrome to match the app's night look. */
+
+.leaflet-popup-content-wrapper {
+  background: var(--surface);
+  color: var(--text);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+
+.leaflet-popup-content {
+  margin: 14px 16px;
+}
+
+.leaflet-popup-tip {
+  background: var(--surface);
+}
+
+.leaflet-popup-close-button {
+  color: var(--text-muted) !important;
+}
+
+.leaflet-popup-close-button:hover {
+  color: var(--text) !important;
+}
+
+.leaflet-control-zoom a {
+  background: var(--surface);
+  color: var(--text);
+  border-color: var(--surface-border) !important;
+}
+
+.leaflet-control-zoom a:hover {
+  background: #1f3040;
+}
+
+.leaflet-control-attribution {
+  background: rgba(13, 27, 42, 0.75);
+  color: var(--text-muted);
+}
+
+.leaflet-control-attribution a {
+  color: var(--text);
+}
+
+/* Category-coded thought pins */
+.category-pin {
+  background: transparent;
+  border: none;
+}
+
+.category-pin-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-size: 15px;
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.5),
+    0 0 0 2px rgba(255, 255, 255, 0.15);
+}
+
+/* Thought pin popup content */
+.thought-popup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 160px;
+}
+
+.thought-popup-category {
+  font-size: 0.8em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.thought-popup-content {
+  margin: 0;
+  color: var(--text);
+  white-space: pre-wrap;
+}

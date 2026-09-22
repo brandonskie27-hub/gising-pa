@@ -1,25 +1,17 @@
 import { useEffect, useState } from 'react'
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet'
 import L from 'leaflet'
-import markerIcon from 'leaflet/dist/images/marker-icon.png'
-import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png'
-import markerShadow from 'leaflet/dist/images/marker-shadow.png'
 import 'leaflet/dist/leaflet.css'
+import './leaflet-theme.css'
 import './PhilippinesMap.css'
 import { supabase } from '../supabaseClient'
 import { isGisingHours } from '../lib/gisingHours'
+import { CATEGORY_META, getCategoryIcon } from '../lib/categories'
 import NewThoughtForm from './NewThoughtForm'
 import ClosedNotice from './ClosedNotice'
 import WorldMask from './WorldMask'
 import WeatherAmbience from './WeatherAmbience'
-
-L.Marker.prototype.options.icon = L.icon({
-  iconUrl: markerIcon,
-  iconRetinaUrl: markerIcon2x,
-  shadowUrl: markerShadow,
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-})
+import AppHeader from './AppHeader'
 
 const PH_CENTER = [12.8797, 121.774]
 const PH_BOUNDS = L.latLngBounds([4.2158, 114.0952], [21.3217, 127.6048])
@@ -34,14 +26,25 @@ function ClickCapture({ onSelect }) {
 }
 
 function ThoughtPins({ thoughts }) {
-  return thoughts.map((thought) => (
-    <Marker key={thought.id} position={[thought.latitude, thought.longitude]}>
-      <Popup>
-        <strong>{thought.category}</strong>
-        <p>{thought.content}</p>
-      </Popup>
-    </Marker>
-  ))
+  return thoughts.map((thought) => {
+    const meta = CATEGORY_META[thought.category]
+    return (
+      <Marker
+        key={thought.id}
+        position={[thought.latitude, thought.longitude]}
+        icon={getCategoryIcon(thought.category)}
+      >
+        <Popup>
+          <div className="thought-popup">
+            <span className="thought-popup-category" style={{ color: meta?.color }}>
+              {meta?.emoji} {meta?.label ?? thought.category}
+            </span>
+            <p className="thought-popup-content">{thought.content}</p>
+          </div>
+        </Popup>
+      </Marker>
+    )
+  })
 }
 
 function PhilippinesMap() {
@@ -107,6 +110,7 @@ function PhilippinesMap() {
         )}
       </MapContainer>
       <WeatherAmbience />
+      <AppHeader />
     </div>
   )
 }

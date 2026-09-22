@@ -1,0 +1,27 @@
+.app-header {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1100;
+  pointer-events: none;
+  text-align: center;
+  padding: 8px 20px;
+  border-radius: 12px;
+  background: rgba(13, 27, 42, 0.55);
+  backdrop-filter: blur(4px);
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.2px;
+}
+
+.app-header p {
+  margin: 2px 0 0;
+  font-size: 12px;
+  color: var(--text-muted);
+}
