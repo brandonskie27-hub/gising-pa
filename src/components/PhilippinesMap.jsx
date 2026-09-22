@@ -7,7 +7,9 @@ import markerShadow from 'leaflet/dist/images/marker-shadow.png'
 import 'leaflet/dist/leaflet.css'
 import './PhilippinesMap.css'
 import { supabase } from '../supabaseClient'
+import { isGisingHours } from '../lib/gisingHours'
 import NewThoughtForm from './NewThoughtForm'
+import ClosedNotice from './ClosedNotice'
 
 L.Marker.prototype.options.icon = L.icon({
   iconUrl: markerIcon,
@@ -43,6 +45,12 @@ function ThoughtPins({ thoughts }) {
 function PhilippinesMap() {
   const [thoughts, setThoughts] = useState([])
   const [pendingPoint, setPendingPoint] = useState(null)
+  const [gisingOpen, setGisingOpen] = useState(() => isGisingHours())
+
+  useEffect(() => {
+    const interval = setInterval(() => setGisingOpen(isGisingHours()), 30_000)
+    return () => clearInterval(interval)
+  }, [])
 
   useEffect(() => {
     async function loadThoughts() {
@@ -86,8 +94,11 @@ function PhilippinesMap() {
       />
       <ClickCapture onSelect={setPendingPoint} />
       <ThoughtPins thoughts={thoughts} />
-      {pendingPoint && (
+      {pendingPoint && gisingOpen && (
         <NewThoughtForm point={pendingPoint} onCancel={() => setPendingPoint(null)} />
+      )}
+      {pendingPoint && !gisingOpen && (
+        <ClosedNotice point={pendingPoint} onDismiss={() => setPendingPoint(null)} />
       )}
     </MapContainer>
   )

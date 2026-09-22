@@ -34,7 +34,11 @@ function NewThoughtForm({ point, onCancel }) {
     setSubmitting(false)
 
     if (insertError) {
-      setError(insertError.message)
+      if (insertError.message.includes('row-level security')) {
+        setError('Tulog na ang Gising Pa? ngayon. Bumalik ka sa pagitan ng 10PM at 3AM.')
+      } else {
+        setError(insertError.message)
+      }
       return
     }
 

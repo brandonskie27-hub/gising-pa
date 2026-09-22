@@ -1,0 +1,15 @@
+.closed-notice {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 200px;
+  text-align: center;
+}
+
+.closed-notice p {
+  margin: 0;
+}
+
+.closed-notice button {
+  align-self: center;
+}
